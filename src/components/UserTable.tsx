@@ -120,8 +120,8 @@ const UserTable = ({
    </div>
 
    {/* Поиск */}
-   <div className="card">
-    <div className="">
+  <div className="card">
+   <div>
      <div className="relative">
       <input
        type="text"

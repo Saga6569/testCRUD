@@ -47,7 +47,7 @@ const Pagination = ({
      ))}
     </select>
 
-    <div className="flex items-center  gap-1">
+    <div className="flex items-center gap-1">
      <button
       className="btn ghost p-2 disabled:opacity-50"
       onClick={handlePrev}
