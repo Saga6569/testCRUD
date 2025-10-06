@@ -4,9 +4,11 @@ import HomePage from './pages/HomePage';
 import UsersPage from './pages/UsersPage';
 import TasksPage from './pages/TasksPage';
 import SettingsPage from './pages/SettingsPage';
+import { UserProvider } from './contexts/UserContext';
 
 function App() {
   return (
+    <UserProvider>
     <Router>
       <Layout>
         <Routes>
@@ -17,6 +19,7 @@ function App() {
         </Routes>
       </Layout>
     </Router>
+    </UserProvider>
   );
 }
 

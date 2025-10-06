@@ -4,6 +4,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { X } from 'lucide-react';
 import type { User, UserFormData } from '../types';
+import Loader from './Loader';
 
 interface UserModalProps {
   isOpen: boolean;
@@ -11,6 +12,7 @@ interface UserModalProps {
   onSubmit: (data: UserFormData) => void;
   user?: User | null;
   title: string;
+  loading?: boolean;
 }
 
 const phoneRegex = /^(\+7|8)?[\s-]?\(?[489][0-9]{2}\)?[\s-]?[0-9]{3}[\s-]?[0-9]{2}[\s-]?[0-9]{2}$/;
@@ -34,7 +36,7 @@ const schema = yup.object({
     .oneOf(['Admin', 'User', 'Manager'], 'Выберите корректную роль')
 }).required();
 
-const UserModal = ({ isOpen, onClose, onSubmit, user, title }: UserModalProps) => {
+const UserModal = ({ isOpen, onClose, onSubmit, user, title, loading = false }: UserModalProps) => {
   const {
     control,
     handleSubmit,
@@ -205,10 +207,11 @@ const UserModal = ({ isOpen, onClose, onSubmit, user, title }: UserModalProps) =
               </button>
               <button
                 type="submit"
-                className="btn-primary"
-                disabled={isSubmitting}
+                className="btn-primary flex items-center gap-2"
+                disabled={isSubmitting || loading}
               >
-                {isSubmitting ? 'Сохранение...' : (user ? 'Обновить' : 'Создать')}
+                {loading ? <Loader size="sm" /> : null}
+                {loading ? 'Загрузка...' : (isSubmitting ? 'Сохранение...' : (user ? 'Обновить' : 'Создать'))}
               </button>
             </div>
           </form>
